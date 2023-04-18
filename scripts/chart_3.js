@@ -12,7 +12,7 @@ Promise.all([mapaFetch3, dataFetch3]).then(([palermo, data]) => {
     },
     color: {
       legend: true,
-      range: ["#fc4445" , "#86b3d1"],
+      range: ["#fc4445" , "#86b3d1", "#159947"],
     },
     marks: [
       Plot.geo(palermo, {
