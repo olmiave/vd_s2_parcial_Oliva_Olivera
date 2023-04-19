@@ -1,9 +1,16 @@
 const mapaFetch3 = d3.json('data/palermo.geojson')
-const dataFetch3 = d3.dsv(';', 'data/147_18-24_agosto.csv', d3.autoType)
-
+const dataFetch3 = d3.dsv(';','data/147_18-24_agosto.csv', d3.autoType)
 Promise.all([mapaFetch3, dataFetch3]).then(([palermo, data]) => {
-  
-  /* Mapa Coroplético */
+    //Filtro reclamos de PALERMO y RESIDUOS VOLUMINOSOS
+    const reclamosPalermoResVolum = data.filter(d=>(d.domicilio_barrio=="PALERMO" && d.subcategoria == "RESIDUOS VOLUMINOSOS"))
+    //Agrupo por género (Femenino/Masculino)
+    const reclamosPorGenero = d3.group(reclamosPalermoResVolum, d => d.genero)
+    //Del agrupamiento anterior me fijo la cantidad de Femenino
+    const cantidadReclFem = reclamosPorGenero.get("Femenino").length
+    //Del agrupamiento anterior me fijo la cantidad de Masculino
+    const cantidadReclMasc = reclamosPorGenero.get("Masculino").length
+
+  // Mapa Coroplético 
   let chartMap3 = Plot.plot({
     // https://github.com/observablehq/plot#projection-options
     projection: {
@@ -18,21 +25,19 @@ Promise.all([mapaFetch3, dataFetch3]).then(([palermo, data]) => {
       Plot.geo(palermo, {
         fill: 'transparent',
         stroke: 'grey',
-        title: d => `${d.properties.BARRIO}\n${d.properties.DENUNCIAS} denuncias`,
+        title: d => `${d.properties.BARRIO}\n Fem ${cantidadReclFem}\n Masc ${cantidadReclMasc} Denuncias`,
       }),
       Plot.dot(
-        data.filter(d=>(d.domicilio_barrio=="PALERMO" && d.subcategoria == "RESIDUOS VOLUMINOSOS")),   
+        reclamosPalermoResVolum,
         {
         x: 'lon',
         y: 'lat',
         r: 7,
         stroke: 'none',
         fill: 'genero',
-
       }),
     ],
   })
-
-  /* Agregamos al DOM la visualización chartMap */
+  // Agregamos al DOM la visualización chartMap
   d3.select('#chart_3').append(() => chartMap3)
 })
