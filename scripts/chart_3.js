@@ -19,13 +19,13 @@ Promise.all([mapaFetch3, dataFetch3]).then(([palermo, data]) => {
     },
     color: {
       legend: true,
-      range: ["#fc4445" , "#86b3d1", "#159947"],
+      range: ["#fc4445" , "#86b3d1"],  //, "#159947"
     },
     marks: [
       Plot.geo(palermo, {
         fill: 'transparent',
         stroke: 'grey',
-        title: d => `${d.properties.BARRIO}\n Fem ${cantidadReclFem}\n Masc ${cantidadReclMasc} Denuncias`,
+        title: d => `${d.properties.BARRIO}\n Femenino: ${cantidadReclFem} denuncias\n Masculino: ${cantidadReclMasc} denuncias`,
       }),
       Plot.dot(
         reclamosPalermoResVolum,
