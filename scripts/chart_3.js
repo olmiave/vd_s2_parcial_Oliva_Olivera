@@ -1,43 +1,120 @@
-const mapaFetch3 = d3.json('data/palermo.geojson')
-const dataFetch3 = d3.dsv(';','data/147_18-24_agosto.csv', d3.autoType)
-Promise.all([mapaFetch3, dataFetch3]).then(([palermo, data]) => {
-    //Filtro reclamos de PALERMO y RESIDUOS VOLUMINOSOS
-    const reclamosPalermoResVolum = data.filter(d=>(d.domicilio_barrio=="PALERMO" && d.subcategoria == "RESIDUOS VOLUMINOSOS"))
-    //Agrupo por género (Femenino/Masculino)
-    const reclamosPorGenero = d3.group(reclamosPalermoResVolum, d => d.genero)
-    //Del agrupamiento anterior me fijo la cantidad de Femenino
-    const cantidadReclFem = reclamosPorGenero.get("Femenino").length
-    //Del agrupamiento anterior me fijo la cantidad de Masculino
-    const cantidadReclMasc = reclamosPorGenero.get("Masculino").length
+d3.dsv(";", "data/147_ruidos_molestos.csv")
 
-  // Mapa Coroplético 
-  let chartMap3 = Plot.plot({
-    // https://github.com/observablehq/plot#projection-options
-    projection: {
-      type: 'mercator',
-      domain: palermo, // Objeto GeoJson a encuadrar
+.then(data => {
+
+const labels = ['PALERMO', 'CABALLITO', 'RECOLETA', 'BELGRANO'];
+
+  const filteredData = data.filter(d => 
+    (d.domicilio_barrio === "PALERMO" ||
+     d.domicilio_barrio === "RECOLETA" ||
+     d.domicilio_barrio === "BELGRANO" ||
+     d.domicilio_barrio === "CABALLITO") &&
+    (d.prestacion === "RUIDOS MOLESTOS Y VIBRACIONES") &&
+      (d.canal === "App BA 147" || d.canal === "GCS Web")
+  );
+
+  const groupedData = d3.group(filteredData, d => d.domicilio_barrio.toUpperCase());
+  const appData = labels.map(barrio => {
+    const count = (groupedData.get(barrio) || []).filter(d => d.canal === 'App BA 147').length;
+    return { barrio, count };
+  });
+  const webData = labels.map(barrio => {
+    const count = (groupedData.get(barrio) || []).filter(d => d.canal === 'GCS Web').length;
+    return { barrio, count };
+  });
+  
+
+    //lollipopChart plugin
+    const lollipopChart = {
+        id: 'lollipopChart',
+        afterDatasetsDraw(chart, args, options) {
+          const { ctx } = chart;
+      
+          ctx.save();
+          for (let i = 0; i < chart.getDatasetMeta(0).data.length; i++) {
+            const x = chart.getDatasetMeta(0).data[i].x;
+            const y = chart.getDatasetMeta(0).data[i].y;
+            
+            let borderColor;
+            if (chart.isDatasetVisible(0) === true) {
+              borderColor = chart.getDatasetMeta(0)._dataset.borderColor[i];
+            } else {
+              borderColor = 'transparent';
+            }
+      
+            circle(x, y, borderColor);
+          }
+      
+    
+    
+          function circle(xPosition, yPosition, color) {
+            const angle = Math.PI / 180;
+            ctx.beginPath();
+            ctx.fillStyle = color;
+            ctx.arc(xPosition, yPosition, 10, angle *0, angle *360, false);
+            ctx.fill();
+            //ctx.fillRect(xPosition - 5, yPosition, 10, chart.getDatasetMeta(0)._parsed[index].y - yPosition);
+            ctx.closePath();
+            ctx.restore();
+      
+          }
+        },
+      }
+
+  const chartData = {
+    labels,
+    datasets: [
+      {
+        label: 'App BA 147',
+        data: appData.map(d => d.count),
+        backgroundColor: 'rgba(99, 27, 242)',
+        borderColor: 'rgba(99, 27, 242)',
+        barPercentage: 0.05,
+      },
+      {
+        label: 'GCS Web',
+        data: webData.map(d => d.count),
+        backgroundColor:
+            'rgba(254, 102, 78)',
+            borderColor:
+                'rgba(254, 102, 78)',
+            barPercentage: 0.05,
+            },
+            ],
+            backgroundColorCircle: [
+                'rgba(99, 27, 242)',
+                'rgba(254, 102, 78)',
+              ],
+            };
+;
+  
+
+// config
+const config = {
+    type: 'bar',
+    data: chartData,
+    options: {
+    plugins: {
+    tooltip:{
+    yAlign:'bottom'
+    }
     },
-    color: {
-      legend: true,
-      range: ["#fc4445" , "#86b3d1"],  //, "#159947"
+    indexAxis: 'x',
+    scales: {
+    y: {
+    beginAtZero: true
+    }
+    }
     },
-    marks: [
-      Plot.geo(palermo, {
-        fill: 'transparent',
-        stroke: 'grey',
-        title: d => `${d.properties.BARRIO}\n Femenino: ${cantidadReclFem} denuncias\n Masculino: ${cantidadReclMasc} denuncias`,
-      }),
-      Plot.dot(
-        reclamosPalermoResVolum,
-        {
-        x: 'lon',
-        y: 'lat',
-        r: 7,
-        stroke: 'none',
-        fill: 'genero',
-      }),
-    ],
-  })
-  // Agregamos al DOM la visualización chartMap
-  d3.select('#chart_3').append(() => chartMap3)
-})
+    plugins: [lollipopChart]
+    };
+    
+    // render init block
+    const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+    );
+    })
+    .catch(err => console.log(err));
+
+  

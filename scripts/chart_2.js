@@ -1,11 +1,11 @@
 const mapaFetch = d3.json('data/barrios-caba.geojson')
-const dataFetch = d3.dsv(';', 'data/147_18-24_agosto.csv', d3.autoType)
+const dataFetch = d3.dsv(';', 'data/147_ruidos_molestos.csv', d3.autoType)
 
 Promise.all([mapaFetch, dataFetch]).then(([barrios, data]) => {
   
   /* Agrupamos reclamos x barrio */
   const reclamosPorBarrio = d3.group(
-    data.filter(d=>(d.subcategoria=="RESIDUOS VOLUMINOSOS")), 
+    data.filter(d=>(d.prestacion==="RUIDOS MOLESTOS Y VIBRACIONES")), 
     d => d.domicilio_barrio) // crea un Map
   console.log('reclamosPorBarrio', reclamosPorBarrio)
   
@@ -29,26 +29,28 @@ Promise.all([mapaFetch, dataFetch]).then(([barrios, data]) => {
     color: {
       // Quantize continuo (cant. denuncias) -> discreto (cant. colores)
       type: 'quantize', 
-      n: 10,
-      scheme: 'ylgn', //burd
-      label: 'Cantidad de denuncias por residuos voluminosos',
+      n: 5,
+      scheme: 'RdPu', //burd
+      domain: [10,250],
+      label: 'Cantidad de denuncias por ruidos molestos y vibraciones',
       legend: true,
     },
     marks: [
       Plot.geo(barrios, {
         fill: d => d.properties.DENUNCIAS ,
-        stroke: 'gray',
-        title: d => `${d.properties.BARRIO}\n${d.properties.DENUNCIAS} denuncias por residuos voluminosos`,
+        stroke: '#D8D8D8',
+        title: d => `${d.properties.BARRIO}\n${d.properties.DENUNCIAS} denuncias por ruidos molestos`,
       }),
       Plot.text(
         barrios.features,
         Plot.centroid({
           text: (d) => d.properties.BARRIO,
-          fill: "currentColor",
-          stroke: "white",
+          //fill: "currentColor",
+          fill: "white",
+          //stroke: "white",
           textAnchor: "center",
           dx: 4,
-          filter: (d) => d.properties.DENUNCIAS > 120
+          filter: (d) => d.properties.DENUNCIAS > 200
         })
       )
     ],
@@ -56,6 +58,6 @@ Promise.all([mapaFetch, dataFetch]).then(([barrios, data]) => {
 
   /* Agregamos al DOM la visualización chartMap */
   d3.select('#chart_2').append(() => chartMap2)
-
-
 })
+
+
