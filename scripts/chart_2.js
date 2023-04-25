@@ -1,4 +1,4 @@
-d3.dsv(";", "../data/147_ruidos_molestos.csv")
+d3.dsv(";", "https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/data/147_ruidos_molestos.csv")
 
 .then(data => {
 
