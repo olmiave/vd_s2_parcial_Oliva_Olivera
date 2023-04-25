@@ -1,63 +1,120 @@
-const mapaFetch = d3.json('data/barrios-caba.geojson')
-const dataFetch = d3.dsv(';', 'data/147_ruidos_molestos.csv', d3.autoType)
+d3.dsv(";", "../data/147_ruidos_molestos.csv")
 
-Promise.all([mapaFetch, dataFetch]).then(([barrios, data]) => {
+.then(data => {
+
+const labels = ['PALERMO', 'CABALLITO', 'RECOLETA', 'BELGRANO'];
+
+  const filteredData = data.filter(d => 
+    (d.domicilio_barrio === "PALERMO" ||
+     d.domicilio_barrio === "RECOLETA" ||
+     d.domicilio_barrio === "BELGRANO" ||
+     d.domicilio_barrio === "CABALLITO") &&
+    (d.prestacion === "RUIDOS MOLESTOS Y VIBRACIONES") &&
+      (d.canal === "App BA 147" || d.canal === "GCS Web")
+  );
+
+  const groupedData = d3.group(filteredData, d => d.domicilio_barrio.toUpperCase());
+  const appData = labels.map(barrio => {
+    const count = (groupedData.get(barrio) || []).filter(d => d.canal === 'App BA 147').length;
+    return { barrio, count };
+  });
+  const webData = labels.map(barrio => {
+    const count = (groupedData.get(barrio) || []).filter(d => d.canal === 'GCS Web').length;
+    return { barrio, count };
+  });
   
-  /* Agrupamos reclamos x barrio */
-  const reclamosPorBarrio = d3.group(
-    data.filter(d=>(d.prestacion==="RUIDOS MOLESTOS Y VIBRACIONES")), 
-    d => d.domicilio_barrio) // crea un Map
-  console.log('reclamosPorBarrio', reclamosPorBarrio)
+
+  const lollipopChart = {
+    id: 'lollipopChart',
+    afterDatasetsDraw(chart, args, options) {
+      const { ctx } = chart;
+
+      ctx.save();
+      const appCoords = [];
+      const webCoords = [];
+      for (let i = 0; i < chart.getDatasetMeta(0).data.length; i++) {
+        const appX = chart.getDatasetMeta(0).data[i].x;
+        const appY = chart.getDatasetMeta(0).data[i].y;
+        const webX = chart.getDatasetMeta(1).data[i].x;
+        const webY = chart.getDatasetMeta(1).data[i].y;
+
+        appCoords.push({ x: appX, y: appY });
+        webCoords.push({ x: webX, y: webY });
+      }
+
+      drawCircles(appCoords, 'App BA 147', '#F768A1');
+      drawCircles(webCoords, 'GCS Web', '#7A0177');
+
+      function drawCircles(coords, canal, color) {
+        const angle = Math.PI / 180;
+        for (let i = 0; i < coords.length; i++) {
+          ctx.beginPath();
+          ctx.arc(coords[i].x, coords[i].y, 10, angle * 0, angle * 360, false);
+          ctx.closePath();
+
+          if (filteredData[i].canal === canal) {
+            ctx.fillStyle = color;
+          } else {
+            ctx.fillStyle = color;
+          }
+          ctx.fill();
+        }
+      }
+    },
+  };
+
+  const chartData = {
+    labels,
+    datasets: [
+      {
+        label: 'App BA 147',
+        data: appData.map(d => d.count),
+        backgroundColor: '#F768A1',
+        borderColor: '#F768A1',
+        barPercentage: 0.05,
+      },
+      {
+        label: 'GCS Web',
+        data: webData.map(d => d.count),
+        backgroundColor:"#7A0177",
+        borderColor:"#7A0177",
+        barPercentage: 0.05,
+            },
+            ],
+          }
+// config
+const config = {
+    type: 'bar',
+    data: chartData,
+    options: {
+    plugins: {
+      title: {
+        display: true,
+        text: 'Canal utilizado '
+      },
+    tooltip:{
+    yAlign:'bottom'
+    }
+    },
+    indexAxis: 'x',
+    scales: {
+    y: {
+    beginAtZero: true
+    }
+    }
+    },
+    plugins: [lollipopChart]
+    };
+    
+   
+    const chart_2 = new Chart(
+    document.getElementById('chart_2'),
+    config
+    );
+
+
+});
+   
+
+
   
-  /* A cada feature del mapa le agregamos la prop DENUNCIAS */
-  barrios.features.forEach(d => {
-    let nombreBarrio = d.properties.BARRIO
-    let cantReclamos =  reclamosPorBarrio.get(nombreBarrio).length
-    d.properties.DENUNCIAS = cantReclamos
-
-    console.log(nombreBarrio + ': ' + cantReclamos)
-  })
-
-
-  /* Mapa Coroplético */
-  let chartMap2 = Plot.plot({
-    // https://github.com/observablehq/plot#projection-options
-    projection: {
-      type: 'mercator',
-      domain: barrios, // Objeto GeoJson a encuadrar
-    },
-    color: {
-      // Quantize continuo (cant. denuncias) -> discreto (cant. colores)
-      type: 'quantize', 
-      n: 5,
-      scheme: 'RdPu', //burd
-      domain: [10,250],
-      label: 'Cantidad de denuncias por ruidos molestos y vibraciones',
-      legend: true,
-    },
-    marks: [
-      Plot.geo(barrios, {
-        fill: d => d.properties.DENUNCIAS ,
-        stroke: '#D8D8D8',
-        title: d => `${d.properties.BARRIO}\n${d.properties.DENUNCIAS} denuncias por ruidos molestos`,
-      }),
-      Plot.text(
-        barrios.features,
-        Plot.centroid({
-          text: (d) => d.properties.BARRIO,
-          //fill: "currentColor",
-          fill: "white",
-          //stroke: "white",
-          textAnchor: "center",
-          dx: 4,
-          filter: (d) => d.properties.DENUNCIAS > 200
-        })
-      )
-    ],
-  })
-
-  /* Agregamos al DOM la visualización chartMap */
-  d3.select('#chart_2').append(() => chartMap2)
-})
-
-

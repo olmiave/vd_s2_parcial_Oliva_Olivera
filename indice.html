@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:type" content="website">
+
+
+        <title>Parcial</title>
+
+        <meta property="og:description" content="Denuncias de ruidos y vibraciones • 2021">    
+        <title>Buenos Aires News</title>
+        <meta name="description" content="Las noticias en un solo lugar">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.4.1/swiper-bundle.css" integrity="sha512-PYSQaQBKTu066xiq+XES4zNfKps3Za9xFsPH97MuEaP53a4kNFed/Q7lW539jALMETHApKj7/CZ1ac9d0NBzZA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link href="styles/main.css" rel="stylesheet">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZLZ33DVGQ"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-2ZLZ33DVGQ');
+        </script>
+    </head>
+    <body>
+
+           
+        <div class="l__preloader">
+            <div class="preloader__content">
+                <p class="preloader__loading">LOADING</p>
+                <p class="preloader__number">0PERCENT</p>
+            </div>
+            
+        </div>
+            <script>
+
+window.onload = function() {
+  const loader = document.querySelector(".l__preloader");
+  let percent = 0;
+  const intervalId = setInterval(function() {
+    percent += 10;
+    if (percent <= 100) {
+      loader.querySelector(".preloader__number").textContent = percent + "PERCENT";
+    } else {
+      clearInterval(intervalId);
+      loader.classList.add("loaded"); // Agregamos la clase "loaded" al elemento "l__preloader"
+      setTimeout(function() {
+        loader.style.display = "none"; // Ocultamos el elemento "l__preloader" después de 1 segundo
+      }, 1000);
+    }
+  }, 90);
+};
+     </script>
+              
+        <div class="preloader__overlay preloader__overlay--black"></div>
+        <div class="preloader__overlay preloader__overlay--yellow"></div>
+        <div class="l__navbar">
+            <div class="navbar__menu">
+                <div class="navbar__menu--logo">
+                    <img src="img/BA.png" >
+                </div>
+                
+              
+                <div class="navbar__label">
+                   
+                </div>
+            </div>
+            <div class="navbar__links">
+            </div>
+        </div>
+        
+        <div id="cursor"></div>
+        
+        <div class="main__container" asscroll-container>
+            <div class="l__content"></div>
+            <div class="tile" id="tile__landing">
+                <div class="landing__bottom-left">
+                    <p class="landing__retrospective splitText">Denuncias de ruidos y vibraciones • 2021 •</p>
+                    <h1 class="landing__name splitText">
+                        <p>
+                            <strong>La ciudad de la furia  </strong> 
+                        </p>
+                    </h1>
+                    <h1 class="landing__roles">
+                 
+                    </h1>
+                </div>
+                <div class="landing__right">
+                    <div class="landing__cta">
+                        <p>
+                            ¿Cuál fue el barrio más ruidoso? →<strong></strong>
+                           
+                        </p>
+                        <p>
+                             <strong> </strong>
+                             
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="tile" id="tile__manifesto">
+                <div class="manifesto__container">
+                    <div class="manifesto__item" id="mi-0">
+                           
+                        <div class="manifesto__item__content">
+                        
+                            <h1>
+                                Palermo en el <strong>primer</strong>
+                                puesto
+                            </h1>
+      
+                            <h2 class="manifesto__item__subtitle">"Es como tener un teléfono sonando en forma constante. O un camión pesado o un tren pasando por al lado todo el tiempo". 
+                                Así es vivir en algunas zonas de Buenos Aires.</h2>
+           
+                    <h2 class="manifesto__item__bajada">
+                    Los barrios de Palermo, Caballito, Belgrano
+                    y Recoleta en la ciudad son conocidos por su animada
+                    vida nocturna, sus bares y restaurantes populares. Sin embargo, este
+                    ambiente también ha generado problemas de ruido excesivo, especialmente
+                    en el primero de ellos que se llevó el primer lugar en 2021 por ser el
+                    barrio más ruidoso de toda la ciudad.
+                    </h2>
+                                    
+                    <h2 class="manifesto__item__bajada2">
+                    El gobierno facilitó nuevos canales para realizar denuncias con respecto al tema, 
+                    sin embargo, el problema del ruido sigue siendo una preocupación importante para 
+                    los residentes y visitantes de estas zonas  y se espera que se sigan implementando
+                    medidas para garantizar un ambiente de vida más tranquilo y saludable.
+                     </h2>
+
+                     </div>   
+
+                        <div class="chartMap-container">
+                        <div  class="chartMap" id="chart_1"></div>
+                    </div>
+                    </div>
+
+                    <div class="manifesto__item" id="mi-1">
+
+                    </div>
+                </div>
+                
+            </div>
+
+
+            <div class="tile" id="tile__about">
+                <div class="about__image">
+                </div>  
+
+                <div class="about__content">
+
+                  <div class="about__title marquee">
+                        <h1>
+                            ¿El <strong>gobierno</strong>
+                            realmente  <br/>
+                            nos escucha? <strong></strong>
+                          
+                        </h1>
+                    </div>
+            
+                    <p class="about__description"> Los nuevos canales fueron un éxito entre los ciudadanos que han recurrido a la aplicación APP BA 147 y la web GCS para denunciar
+                        estos problemas. Ambas plataformas han demostrado ser eficaces para hacer llegar las quejas a las autoridades 
+                        y llevar a cabo un seguimiento de los casos.</p>
+
+
+                        
+                    <div class="about__description--resize">
+                        <p>La APP BA 147 es una aplicación móvil que permite a los usuarios reportar diversos problemas que afectan la
+                            calidad de vida en la ciudad, incluyendo el ruido excesivo. A través de la aplicación, los ciudadanos pueden 
+                            enviar una descripción detallada del problema, incluyendo fotos y videos si es necesario, lo que facilita el 
+                            trabajo de las autoridades para identificar el origen del ruido y tomar medidas para solucionarlo.</p>
+                             
+                  
+                </div>
+
+
+
+                <a href="http://127.0.0.1:3000/indexes/indexlollipop.html">
+               
+        
+                <div class="chart-container">
+                    <canvas id="chart_2"></canvas>
+                
+                </div> 
+            </a>
+
+             </div>
+            </div>
+
+
+            <div class="tile" id="tile__projects">
+                <div class="projects__container">
+
+                 
+                    <canvas id="chart_3"></canvas> 
+                  
+                    <a class="project__item" href="http://127.0.0.1:3000/indexes/indexchart1.html" data-transition>
+                     
+                    </a>
+                     
+                    <a class="project__item" href="http://127.0.0.1:3000/indexes/indexchart1.html" data-transition>
+                       
+                        </div>
+                        <h2 class="project__item--name">
+                            <span> A pesar de que la aplicación App BA 147 y la web GCS 
+                                ofrecen una forma fácil y conveniente de realizar denuncias,
+                                muchos residentes han reportado que estas han sido ignoradas, 
+                                o que reciben una respuesta insuficiente o inadecuada lo cual 
+                                puede ser frustrante para los usuarios, quienes esperan una 
+                                solución rápida y eficaz a sus problemas. La falta de atención
+                                y resolución de los casos abiertos puede tener graves consecuencias
+                                 para la seguridad y el bienestar de los ciudadanos.
+                            </span>
+                        </h2>
+                    </a>
+                   
+                </div>
+
+              
+
+            <div class="tile" id="tile__contact">
+                <div class="contact__content">
+                    <div class="contact__title">
+                        <h2>
+                            <strong>Mantenete Informado</strong>
+                            con 
+                        </h2>
+                        <h2>
+                             <strong>nosotros</strong>
+                        </h2>
+                        <a class="contact__button--container desktop__only">
+                            <div class="contact__expand"></div>
+                            <div class="contact__button contact__button1">
+                                <span>KEEP</span>
+                            </div>
+                            <div class="contact__button contact__button2">
+                                <span>IN</span>
+                            </div>
+                            <div class="contact__button contact__button3">
+                                <span>TOUCH</span>
+                            </div>
+                        </a>
+                    
+                        <a class="contact__subscribe hover--underline hover--underline__newsletter" href="http://127.0.0.1:3000/indice.html" rel="noreferrer" target="_blank">
+                            <p>
+                                Subscribete <strong>al</strong>
+                                Noticiero →
+                            </p>
+                        </a>
+                    </div>
+                </div>
+                <p class="contact__copyright">©BA News• Ruidos molestos-2021</p>
+                <div class="contact__credits">
+                    <a class="hover--underline" href="https://data.buenosaires.gob.ar/dataset/sistema-unico-atencion-ciudadana" target="_blank" rel="noreferrer">Sources</a>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.4.1/swiper-bundle.min.js" integrity="sha512-pY1t/ADgTwbfGbw0+mRGd33EroA5YgRUWhQNFpPIAdBzyoSb38FsFrf4wBTcS3GFPdTfgtpRrbGCkdl2C2OXYA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <script src="scripts/chart_1.js"></script>
+  <script src="scripts/chart_2.js"></script>
+  <script src="scripts/chart_3.js"></script>
+
+    <script src="scripts/main.js"></script>
+</html>
