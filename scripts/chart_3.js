@@ -13,8 +13,7 @@ d3.dsv(";", "https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/data/147_ruid
   // Funciones para obtener la cantidad de denuncias cerradas y abiertas para cada barrio
   const Cerrado = d => d.estado_del_contacto === "Cerrado" ? 1 : 0;
   const Abierto = d=> d.estado_del_contacto === "Abierto" ? 1 : 0;
- // const AbiertoData = [];
- // Abierto.forEach(element => AbiertoData.push(element & -1));
+
 
   // Obtener la cantidad de denuncias cerradas y abiertas para cada barrio
   const cerradoPorBarrio = barrios.map(barrio => {
@@ -37,64 +36,71 @@ d3.dsv(";", "https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/data/147_ruid
     }, 0));
   });
 
-  // Crear la configuración del gráfico
+
   const config = {
     type: 'bar',
     data: {
+    
       labels: barrios,
+
+
       datasets: [
         {
+
           label: "Cerrado",
           backgroundColor:'#F768A1', 
           data: cerradoPorBarrio,
           barPercentage: 1,
-          //categoryPercentage: 0.5,
+     
         },
         {
+          
           label: "Abierto",
-          backgroundColor: "#7A0177", 
+       
 
+          backgroundColor: "#7A0177", 
           data: abiertoPorBarrio,
           barPercentage: 1,
-          //width: 100,
         },
       ],
-      
     },
-   
-    options: {
-      indexAxis: 'y', 
-      scales: {
-        xAxes: [
-          {
-            ticks: {
-              beginAtZero: true,
-              stepSize: 1,
-            },
+
+
+     options: {
+    indexAxis: 'y', 
+    scales: {
+      xAxes: [
+        {
+          ticks: {
+            
+            beginAtZero: true,
+            stepSize: 1,
+
           },
-        ],
-        yAxes: [
-          {
-            ticks: {
-              fontColor: "#333",
-            },
-          },
-        ],
-      },
-      plugins: {
-        title: {
-          display: true,
-          text: 'Estado de la denuncia'
         },
-        legend: {
-          position: 'right',
-        }
+      ],
+      yAxes: [
+        {
+          ticks: {
+          },
+        },
+      ],
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: 'Estado de la denuncia',
+        color: 'white',
       },
+      legend: {
+        position: 'right',
+      }
+    },
+  }
+  
+};
 
-     }
-  };
-
-
+  
   const chart_3 = new Chart(
     document.getElementById('chart_3'),
     config

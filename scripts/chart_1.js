@@ -65,7 +65,7 @@ Promise.all([mapaFetch, dataFetch]).then(([barrios, data]) => {
 
     style: {
 
-      background: '#1d011e',
+      background: 'transparent',
    
     },
   })

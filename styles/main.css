@@ -272,7 +272,7 @@ canvas {
 
 #tile__projects {
     width: 250rem;
-    background-color: #fff980;
+    background-color: #33115a;
     z-index: 17;
     padding-left: 50rem;
     display: flex;
@@ -512,6 +512,34 @@ canvas {
     width:40%;
 }
 
+.manifesto__item__ref1 {
+    font-family: "Lausanne-regular",sans-serif;
+    font-size: 1.5rem;
+    padding-bottom: 10rem;
+    margin-top: -8rem;
+    margin-left: 107rem;
+    color:white;
+}
+
+.manifesto__item__ref4 {
+    font-family: "Lausanne-regular",sans-serif;
+    font-size: 1.5rem;
+    padding-bottom: 5rem;
+    margin-top: 53rem;
+    margin-left: -10rem;
+    color:white;
+    
+}
+.manifesto__item__ref5 {
+    font-family: "Lausanne-regular",sans-serif;
+    font-size: 1.5rem;
+    padding-bottom: 5rem;
+    margin-top: 53rem;
+    margin-left: 1rem;
+    color:white;
+    
+}
+
 .manifesto__item__bajada2 {
     font-family: "Lausanne-regular",sans-serif;
     font-size: 2.4rem;
@@ -529,11 +557,20 @@ canvas {
     line-height: 6rem;
     white-space: nowrap;  
     color: #fb00ff;
-    letter-spacing: -0.4rem;
-   
-   
+    letter-spacing: -0.4rem;  
 }
 
+
+.manifesto__container1 h1 {
+    font-family: "Lausanne-regular",sans-serif;
+    font-size: 8rem;
+    margin-top: -5rem;
+    line-height: 6rem;
+    white-space: nowrap;  
+    color: #b4fc75;
+    width: 5%;
+    letter-spacing: -0.009rem;  
+}
 
 .manifesto__container .manifesto__item__text {
     font-size: 1.8rem;
@@ -647,7 +684,7 @@ canvas {
     /* flex-direction: column; */
     justify-content: center;
     align-items: center;
-    width: 43%;
+    width: 42%;
     position: fixed;
     bottom:0;
     top: -10rem;
@@ -686,7 +723,7 @@ canvas {
 }
 
 .project__item .project__item--name {
-    color:#090909;
+    color:#fffefe;
     font-size: 2.8rem;
      padding: 8rem;
     width: 130%;

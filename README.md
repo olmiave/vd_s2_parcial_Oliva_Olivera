@@ -21,7 +21,7 @@ Demo de la página :  https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/
 
 ## :sound: Chart 01 - Palermo con el primer lugar
 
-[![Chart01](https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/imagenes/chart01.jpeg)](https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/)
+[![Chart01](https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/img/chart01.png)](https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/)
 
 Este gráfico representa la cantidad de denuncias que hubo en Buenos Aires acerca de ruidos molestos y vibraciones. Utilizamos un mapa de CABA (marca) que visualiza exactamente eso, de ese modo, podemos observar de manera efectiva cuales son los barrios que tienen más cantidad de denuncias de esa prestación, permitiendo así una comparación rápida de la diferencia en la magnitud de denuncias. 
 
@@ -33,9 +33,9 @@ Por lo cual, en un intervalo de 50 unidades y mediante una leyenda, se logra dif
 En cuanto a las decisiones de diseño, se utiliza una disposición gráfica clara y sencilla, en la que se agrupan la cantidad de denuncias de la prestación ruidos molestos y vibraciones por cada barrio. Además, se ha elegido un fondo oscuro para resaltar los colores utilizados en la visualización y se selecciona una fuente y tamaño de letra adecuados para facilitar la lectura del gráfico.
 
 
-## :sound: Chart 02 - ¿El gobierno realmente nos escucha?
+## :sound: Chart 02 - Ruido urbano, denuncias digitales
 
-[![Chart02](https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/imagenes/chart02.jpeg)](https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/)
+[![Chart02](https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/img/chart02.png)](https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/)
 
 EL gráfico de lollipop (canal) muestra la cantidad de denuncias de ruidos molestos y vibraciones hechas en los cuatro barrios previamente mencionados mediante las aplicaciones más utilizadas (App BA 147 y GCS Web), donde cada punto de información es representado por una barra vertical con un círculo en su punta. El círculo sirve como marcas que llevan la atención hacia los valores, haciendo que sea más fácil compararlos con otros puntos. Además, llama la atención ya que los círculos en la punta de cada línea destacan los valores a la audiencia, convirtiéndolo en un gráfico más propensos a recordar. Asimismo, al tener un dataset reducido, el gráfico de lollipo permite visualizar cada valor individual de manera clara y con la ayuda de ser estéticamente agradable, donde las lineas y círculos crean un patrón visual interesante que impacta en lo que se enfoca el receptor.   
 
@@ -46,9 +46,9 @@ Por lo tanto, en el eje Y representamos las cantidades, es decir, los valores qu
 La elección de los puntos con barras, los colores utilizados y los canales representativos son adecuados para la representación de los datos. Además, al superponer el mouse sobre el texto para mostrar la cantidad de denuncias de ruidos molestos y vibraciónes por app es una solución elegante para diferenciar entre los datos de una manera aún más clara.
 
 
-## :sound: Chart 03 - 
+## :sound: Chart 03 - ¿El gobierno realmente nos escucha?
 
-[![Chart03](https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/imagenes/chart03.jpeg)](https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/)
+[![Chart03](https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/img/chart03.png)](https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/)
 
 Utilizando un gráfico de barras horizontales (canal) comparamos entre los cuatro barrios más ruidosos establecidos en el primer gráfico, cuántas denuncias fueron cerradas y cuántas aún continúan abiertas. Esta viusalizacion resalta, por ejemplo, que la proporción de casos abiertos y cerrados en Palermo es mayor que en Caballito, como también la diferencia entre la cantidad de denuncias totales entre ellos. Es decir, al usar barras horizontales nos ayuda comparar visualmente las diferencias entre los barrios en el estado del contacto y sus valores. La longitud de cada barra indica la cantidad de datos en cada estado por barrio y el ancho de la barra es uniforme y no influye en la representación de los datos. Asimismo, se utilizaron una escala en el eje x que muestra la cantidad.
 
