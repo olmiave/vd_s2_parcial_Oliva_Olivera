@@ -1,4 +1,4 @@
-# ![JPG](https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/imagenes/ruidos.jpg)
+# ![JPG](https://olmiave.github.io/vd_s2_parcial_Oliva_Olivera/img/BsAs.png)
 # :telephone_receiver:  Parcial - Narrativa visual de la línea 147 :telephone_receiver: 
 Integrantes: Micaela Oliva y Carolina Olivera
 
